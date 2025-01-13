@@ -7,60 +7,15 @@ let state = 0; // 初期状態
 function setup() {
   createCanvas(400, 400);
   background(255);
-  textSize(20);
-  myFont = createFont("Makinas-4-Flat", 25);
-  textFont(myFont);
+  textSize(25);
+  textFont('Arial');
 }
 
 function draw() {
   if (isActivated) {
-    // 正解時の処理
-    // 経過時間を計算して3秒後に次の状態へ
-    if (millis() - startTime >= 3000 && state === 0) {
-      isActivated = false; // 正解モードを終了
-      state = 1;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 1) {
-      isActivated = false; // 正解モードを終了
-      state = 2;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 2) {
-      isActivated = false; // 正解モードを終了
-      state = 3;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 3) {
-      isActivated = false; // 正解モードを終了
-      state = 4;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 4) {
-      isActivated = false; // 正解モードを終了
-      state = 5;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 5) {
-      isActivated = false; // 正解モードを終了
-      state = 6;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 6) {
-      isActivated = false; // 正解モードを終了
-      state = 7;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 7) {
-      isActivated = false; // 正解モードを終了
-      state = 8;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 8) {
-      isActivated = false; // 正解モードを終了
-      state = 9;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 9) {
-      isActivated = false; // 正解モードを終了
-      state = 10;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    } else if (millis() - startTime >= 3000 && state === 10) {
-      isActivated = false; // 正解モードを終了
-      state = 11;           // 次の状態に遷移
-      startTime = 0;       // タイマーをリセット
-    }
+    isActivated = false; // 状態遷移後にフラグをリセット
+    startTime = 0; // タイマーをリセット
+    state++; // 状態を遷移
   } else {
     // 通常時の処理
     background(255);
@@ -128,7 +83,7 @@ function keyPressed() {
       isActivated = true;
     }
     userInput = ""; // 入力をリセット
-  } else if (key !== CODED) {
+  } else if (keyCode !== BACKSPACE && keyCode !== ENTER && keyCode !== RETURN) {
     // 他のキーが押された場合、文字を追加
     userInput += key;
   }
