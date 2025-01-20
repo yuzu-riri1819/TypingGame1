@@ -15,19 +15,18 @@ let img0, img1, img2, img3, img4, img5, img6, img7, img8;
 let sound1, sound2;
 
 function preload() {
-  myFont = loadFont("Makinas-4-Flat.ttf");
-  img0 = loadImage("ドン引き.png");
-  img1 = loadImage("4.png");
-  img2 = loadImage("3.png");
-  img3 = loadImage("2.png");
-  img4 = loadImage("1.png");
-  img5 = loadImage("5.png");
-  img6 = loadImage("6.png");
-  img7 = loadImage("タイトル.png");
-  img8 = loadImage("クリック.png");
+  img0 = loadImage("asetts/ドン引き.png");
+  img1 = loadImage("asetts/4.png");
+  img2 = loadImage("asetts/3.png");
+  img3 = loadImage("asetts/2.png");
+  img4 = loadImage("asetts/1.png");
+  img5 = loadImage("asetts/5.png");
+  img6 = loadImage("asetts/6.png");
+  img7 = loadImage("asetts/タイトル.png");
+  img8 = loadImage("asetts/クリック.png");
   soundFormats('mp3');
-  sound1 = loadSound("ほのぼの.mp3");
-  sound2 = loadSound("bgm.mp3");
+  sound1 = loadSound("asetts/ほのぼの.mp3");
+  sound2 = loadSound("asetts/bgm.mp3");
 }
 
 function setup() {
