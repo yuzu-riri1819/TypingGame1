@@ -1,26 +1,85 @@
 let userInput = ""; // ユーザーが入力した文字列を格納する
 let isActivated = false; // プログラムの状態を管理する
-let myFont;
-let startTime;  // 時間を計測するための変数
+let fadeOut = false; // フェードアウトを開始するフラグ
+let clear = false;
+let title = false;
+let fadeIn = true; // フェードイン中かどうか
+let startTime; // 時間を計測するための変数
+let alphaValue = 0; // 透明度を管理
+let alpha = 0; 
 let state = 0; // 初期状態
+let game_point = 0;
+let yabai = 0;
+let volume = 1.0; // 初期音量（1.0が最大）
+let img0, img1, img2, img3, img4, img5, img6, img7, img8;
+let sound1, sound2;
+
+function preload() {
+  myFont = loadFont("Makinas-4-Flat.ttf");
+  img0 = loadImage("ドン引き.png");
+  img1 = loadImage("4.png");
+  img2 = loadImage("3.png");
+  img3 = loadImage("2.png");
+  img4 = loadImage("1.png");
+  img5 = loadImage("5.png");
+  img6 = loadImage("6.png");
+  img7 = loadImage("タイトル.png");
+  img8 = loadImage("クリック.png");
+  soundFormats('mp3');
+  sound1 = loadSound("ほのぼの.mp3");
+  sound2 = loadSound("bgm.mp3");
+}
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(816, 624);
   background(255);
   textSize(25);
   textFont('Arial');
+  sound2.setVolume(volume);
+  sound2.loop();
 }
 
 function draw() {
+  // 透明度を調整
+  if (fadeIn) {
+    alpha += 5; // 徐々に不透明に
+    if (alpha >= 255) {
+      fadeIn = false; // フェードアウトに切り替え
+    }
+  } else {
+    alpha -= 5; // 徐々に透明に
+    if (alpha <= 0) {
+      fadeIn = true; // フェードインに切り替え
+    }
+  }
+
+  if (!title) {
+    tint(255, alpha);
+    image(img8, 0, 0, 816, 624);
+  }
+  image(img7, 0, 0, 816, 624);
+
+  if (fadeOut && volume > 0) {
+    volume -= 0.01; // 音量を徐々に下げる
+    sound2.setVolume(volume);
+    if (volume <= 0) {
+      sound2.stop(); // 音量が0になったら停止
+      fadeOut = false; // フラグをリセット
+      title = true; 
+    }
+    if (title) {
+      sound1.loop(); // ループ再生
+    }
+  }
+
   if (isActivated) {
-    isActivated = false; // 状態遷移後にフラグをリセット
-    startTime = 0; // タイマーをリセット
-    state++; // 状態を遷移
+    isActivated = false; // 正解モードを終了
+    state++; // 次の状態に遷移
   } else {
     // 通常時の処理
     background(255);
     fill(0);
-    if (state === 0) {
+    if (title && state === 0) {
       text("名前は？", 50, height / 2 - 20);
     } else if (state === 1) {
       text("誕生日は？(例：1/1)", 50, height / 2 - 20);
@@ -35,70 +94,134 @@ function draw() {
     } else if (state === 6) {
       text("嫌いな人の名前は？", 50, height / 2 - 20);
     } else if (state === 7) {
-      text("誰に連れられて演劇部に", 50, height / 2 - 20);
-      text("来た？", width - 100, height / 2 + 10);
+      text("誰に連れられて演劇部に来た？", 50, height / 2 - 20);
     } else if (state === 8) {
       text("出身地は？", 50, height / 2 - 20);
     } else if (state === 9) {
-      text("勇・小雪とは", 50, height / 2 - 20);
-      text("小学何年生からの付き合い？", 80, height / 2 + 10);
+      text("勇・小雪とは小学何年生からの付き合い？", 50, height / 2 - 20);
     } else if (state === 10) {
       text("好きな料理は？", 50, height / 2 - 20);
     }
     text(userInput, 50, height / 2 + 20);
   }
+
+  if (clear) {
+    // 状態ごとに表示内容を切り替え
+    handleClearState();
+  }
+}
+
+function handleClearState() {
+  if (game_point === 11) {
+    displayEnding(img0, "...なんなんだアンタ");
+  } else if (yabai === 4) {
+    if (game_point > 5 && game_point < 11) {
+      displayEnding(img1, "何で知ってんだ...？");
+    } else {
+      displayEnding(img2, "…良く知ってんな……。");
+    }
+  } else if (yabai > 2 && yabai < 4) {
+    if (game_point > 5 && game_point < 11) {
+      displayEnding(img3, "…ありがと。");
+    } else {
+      displayEnding(img4, "俺のこと、まあまあ知ってんだな。");
+    }
+  } else if (yabai <= 2) {
+    if (game_point > 5) {
+      displayEnding(img5, "ありがとな。");
+    } else {
+      displayEnding(img6, "…そうか");
+    }
+  }
+
+  if (alphaValue >= 255) {
+    noLoop();
+  }
+}
+
+function displayEnding(img, message) {
+  alphaValue = min(alphaValue + 2, 255); // 透明度を徐々に上げる
+  tint(255, alphaValue); // 透明度を設定
+  image(img, 0, 0, 816, 624);
+  textSize(200);
+  text(game_point, width / 2, height / 2 + 100);
+  textSize(40);
+  text(message, width / 2, 150);
+}
+
+function mousePressed() {
+  fadeOut = true; // クリックでフェードアウトを開始
 }
 
 function keyPressed() {
   if (keyCode === BACKSPACE) {
     // バックスペースが押された場合、文字を削除
     if (userInput.length > 0) {
-      userInput = userInput.substring(0, userInput.length - 1);
+      userInput = userInput.slice(0, -1);
     }
-  } else if (keyCode === ENTER || keyCode === RETURN) {
-    // Enterキーが押された場合、コマンドを確認
-    if (normalizeInput(userInput) === normalizeInput("kigarashi hyouri") && state === 0) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("wakaranai")) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("11/20") && state === 1) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("kigarashi touka") && state === 2) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("187") && state === 3) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("kigarashi toa") && state === 4) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("esume") && state === 5) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("yanagi ryou") && state === 6) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("shinonome koyuki") && state === 7) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("oosaka") && state === 8) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("1") && state === 9) {
-      isActivated = true;
-    } else if (normalizeInput(userInput) === normalizeInput("mirufi-yunabe") && state === 10) {
-      isActivated = true;
-    }
+  } else if (keyCode === ENTER) {
+    handleUserInput();
     userInput = ""; // 入力をリセット
-  } else if (keyCode !== BACKSPACE && keyCode !== ENTER && keyCode !== RETURN) {
-    // 他のキーが押された場合、文字を追加
+  } else {
     userInput += key;
+  }
+}
+
+function handleUserInput() {
+  const normalized = normalizeInput(userInput);
+  if (normalized === normalizeInput("kigarashi hyouri") && state === 0) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("wakaranai")) {
+    isActivated = true;
+  } else if (normalized === normalizeInput("11/20") && state === 1) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("kigarashi touka") && state === 2) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("187") && state === 3) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("kigarashi toa") && state === 4) {
+    isActivated = true;
+    game_point++;
+    yabai++;
+  } else if (normalized === normalizeInput("esume") && state === 5) {
+    isActivated = true;
+    game_point++;
+    yabai++;
+  } else if (normalized === normalizeInput("yanagi ryou") && state === 6) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("shinonome koyuki") && state === 7) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("oosaka") && state === 8) {
+    isActivated = true;
+    game_point++;
+  } else if (normalized === normalizeInput("1") && state === 9) {
+    isActivated = true;
+    game_point++;
+    yabai++;
+  } else if (normalized === normalizeInput("mirufi-yunabe") && state === 10) {
+    clear = true;
+    game_point++;
+    yabai++;
+    state++;
   }
 }
 
 function normalizeInput(input) {
   return input
-    .toLowerCase() // 小文字に変換
+    .toLowerCase()
     .trim()
-    .replace("si", "shi")
-    .replace("toka", "touka")
-    .replace("hyori", "hyouri")
-    .replace("ousaka", "oosaka")
-    .replace("yanagi ryo", "yanagi ryou")
-    .replace("huli", "fi")
-    .replace("187cm", "187")
-    .replace("esume fon kuruto", "esume");
+    .replace(/si/g, "shi")
+    .replace(/toka/g, "touka")
+    .replace(/hyori/g, "hyouri")
+    .replace(/ousaka/g, "oosaka")
+    .replace(/yanagi ryo/g, "yanagi ryou")
+    .replace(/huli/g, "fi")
+    .replace(/187cm/g, "187")
+    .replace(/esume fon kuruto/g, "esume");
 }
