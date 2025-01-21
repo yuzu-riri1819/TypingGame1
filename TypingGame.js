@@ -37,7 +37,6 @@ function setup() {
 }
 
 function draw() {
-    image(img7, 0, 0, 816, 624);
 if(fadeOut){
   alpha2 -= 5; // 徐々に透明に
     if (alpha2 <= 0) {
@@ -61,7 +60,7 @@ if(fadeOut){
     tint(255, alpha);
     image(img8, 0, 0, 816, 624);
     tint(255, alpha2);
-
+    image(img7, 0, 0, 816, 624);
   }
 
   if (isActivated) {
@@ -71,7 +70,7 @@ if(fadeOut){
     // 通常時の処理
     background(255);
     fill(0);
-    if (title && state === 0) {
+    if (title) {
       text("名前は？", 50, height / 2 - 20);
     } else if (state === 1) {
       text("誕生日は？(例：1/1)", 50, height / 2 - 20);
