@@ -99,7 +99,6 @@ if(fadeOut){
 }
 
   if (clear) {
-println("yabai:", yabai, "game_point:", game_point);
     // 状態ごとに表示内容を切り替え
     handleClearState();
   }
@@ -207,7 +206,10 @@ function handleUserInput() {
     game_point++;
     yabai++;
     state++;
-  }
+  } else if (normalized === normalizeInput("wakaranai") && state === 10) {
+    clear = true;
+    state++;
+ }
 }
 
 function normalizeInput(input) {
