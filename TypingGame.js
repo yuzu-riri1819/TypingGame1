@@ -15,15 +15,15 @@ let img0, img1, img2, img3, img4, img5, img6, img7, img8;
 let sound1, sound2;
 
 function preload() {
-  img0 = loadImage("asetts/ドン引き.png");
-  img1 = loadImage("asetts/4.png");
-  img2 = loadImage("asetts/3.png");
-  img3 = loadImage("asetts/2.png");
-  img4 = loadImage("asetts/1.png");
-  img5 = loadImage("asetts/5.png");
-  img6 = loadImage("asetts/6.png");
-  img7 = loadImage("asetts/タイトル.png");
-  img8 = loadImage("asetts/クリック.png");
+  img0 = loadImage('assets/ドン引き.png');
+  img1 = loadImage("assets/4.png");
+  img2 = loadImage("assets/3.png");
+  img3 = loadImage("assets/2.png");
+  img4 = loadImage("assets/1.png");
+  img5 = loadImage("assets/5.png");
+  img6 = loadImage("assets/6.png");
+  img7 = loadImage("assets/タイトル.png");
+  img8 = loadImage("assets/クリック.png");
   soundFormats('mp3');
   sound1 = loadSound("asetts/ほのぼの.mp3");
   sound2 = loadSound("asetts/bgm.mp3");
@@ -111,21 +111,21 @@ function draw() {
 }
 
 function handleClearState() {
+ if (yabai == 3 || yabai === 4) {
   if (game_point === 11) {
     displayEnding(img0, "...なんなんだアンタ");
-  } else if (yabai === 4) {
-    if (game_point > 5 && game_point < 11) {
+  }else if (game_point > 5 && game_point < 11) {
       displayEnding(img1, "何で知ってんだ...？");
     } else {
       displayEnding(img2, "…良く知ってんな……。");
     }
-  } else if (yabai > 2 && yabai < 4) {
+  } else if (yabai == 2) {
     if (game_point > 5 && game_point < 11) {
       displayEnding(img3, "…ありがと。");
     } else {
       displayEnding(img4, "俺のこと、まあまあ知ってんだな。");
     }
-  } else if (yabai <= 2) {
+  } else if (yabai <= 1) {
     if (game_point > 5) {
       displayEnding(img5, "ありがとな。");
     } else {
