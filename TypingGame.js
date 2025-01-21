@@ -69,7 +69,8 @@ if(fadeOut){
   } else {
     // 通常時の
     if (title) {
-
+      background(255);
+      fill(0);
       text("名前は？", 50, height / 2 - 20);
     } else if (state === 1) {
       text("誕生日は？(例：1/1)", 50, height / 2 - 20);
