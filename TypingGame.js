@@ -63,9 +63,6 @@ function draw() {
       fadeOut = false; // フラグをリセット
       title = true; 
     }
-    if (title) {
-      sound1.loop(); // ループ再生
-    }
   }
 
   if (isActivated) {
@@ -146,6 +143,7 @@ function displayEnding(img, message) {
 }
 
 function mousePressed() {
+  sound1.loop(); // ループ再生
   fadeOut = true; // クリックでフェードアウトを開始
 }
 
