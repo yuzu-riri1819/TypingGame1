@@ -7,6 +7,7 @@ let fadeIn = true; // フェードイン中かどうか
 let startTime; // 時間を計測するための変数
 let alphaValue = 0; // 透明度を管理
 let alpha = 0; 
+let alpha2 = 255; 
 let state = 0; // 初期状態
 let game_point = 0;
 let yabai = 0;
@@ -36,6 +37,12 @@ function setup() {
 }
 
 function draw() {
+if(fadeOut){
+  alpha2 -= 5; // 徐々に透明に
+    if (alpha2 <= 0) {
+	alpha = 0;
+    }
+}
   // 透明度を調整
   if (fadeIn) {
     alpha += 5; // 徐々に不透明に
@@ -52,17 +59,8 @@ function draw() {
   if (!title) {
     tint(255, alpha);
     image(img8, 0, 0, 816, 624);
-  }
-  image(img7, 0, 0, 816, 624);
-
-  if (fadeOut && volume > 0) {
-    volume -= 0.01; // 音量を徐々に下げる
-    sound2.setVolume(volume);
-    if (volume <= 0) {
-      sound2.stop(); // 音量が0になったら停止
-      fadeOut = false; // フラグをリセット
-      title = true; 
-    }
+    tint(255, alpha2);
+    image(img7, 0, 0, 816, 624);
   }
 
   if (isActivated) {
@@ -143,7 +141,9 @@ function displayEnding(img, message) {
 }
 
 function mousePressed() {
+if(!fadeOut){
   sound1.loop(); // ループ再生
+}
   fadeOut = true; // クリックでフェードアウトを開始
 }
 
