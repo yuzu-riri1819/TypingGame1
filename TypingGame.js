@@ -13,7 +13,7 @@ let game_point = 0;
 let yabai = 0;
 let volume = 1.0; // 初期音量（1.0が最大）
 let img0, img1, img2, img3, img4, img5, img6, img7, img8;
-let sound1;
+let sound1, sound2;
 
 function preload() {
   img0 = loadImage('assets/ドン引き.png');
@@ -27,6 +27,7 @@ function preload() {
   img8 = loadImage("assets/クリック.png");
   soundFormats('mp3');
   sound1 = loadSound("assets/ほのぼの.mp3");
+  sound2 = loadSound("assets/決定ボタンを押す29.mp3");
 }
 
 function setup() {
@@ -167,41 +168,52 @@ function keyPressed() {
 function handleUserInput() {
   const normalized = normalizeInput(userInput);
   if (normalized === normalizeInput("kigarashi hyouri") && state === 0) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("wakaranai") && 0 <= state && state <= 9) {
     isActivated = true;
   } else if (normalized === normalizeInput("11/20") && state === 1) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("kigarashi touka") && state === 2) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("187") && state === 3) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("kigarashi toa") && state === 4) {
+    sound2.play();
     isActivated = true;
     game_point++;
     yabai++;
   } else if (normalized === normalizeInput("esume") && state === 5) {
+    sound2.play();
     isActivated = true;
     game_point++;
     yabai++;
   } else if (normalized === normalizeInput("yanagi ryou") && state === 6) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("shinonome koyuki") && state === 7) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("oosaka") && state === 8) {
+    sound2.play();
     isActivated = true;
     game_point++;
   } else if (normalized === normalizeInput("1") && state === 9) {
+    sound2.play();
     isActivated = true;
     game_point++;
     yabai++;
   } else if (normalized === normalizeInput("mirufi-yunabe") && state === 10) {
+    sound2.play();S
     clear = true;
     game_point++;
     yabai++;
