@@ -12,7 +12,7 @@ let game_point = 0;
 let yabai = 0;
 let volume = 1.0; // 初期音量（1.0が最大）
 let img0, img1, img2, img3, img4, img5, img6, img7, img8;
-let sound1, sound2;
+let sound1;
 
 function preload() {
   img0 = loadImage('assets/ドン引き.png');
@@ -26,7 +26,6 @@ function preload() {
   img8 = loadImage("assets/クリック.png");
   soundFormats('mp3');
   sound1 = loadSound("asetts/ほのぼの.mp3");
-  sound2 = loadSound("asetts/bgm.mp3");
 }
 
 function setup() {
@@ -34,8 +33,6 @@ function setup() {
   background(255);
   textSize(25);
   textFont('Arial');
-  sound2.setVolume(volume);
-  sound2.loop();
 }
 
 function draw() {
