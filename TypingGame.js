@@ -113,13 +113,13 @@ function handleClearState() {
     } else {
       displayEnding(img2, "…良く知ってんな……。");
     }
-  } else if (yabai == 2) {
+  } else if (yabai === 2) {
     if (game_point > 5 && game_point < 11) {
       displayEnding(img3, "…ありがと。");
     } else {
       displayEnding(img4, "俺のこと、まあまあ知ってんだな。");
     }
-  } else if (yabai <= 1) {
+  } else if (yabai === 1 || yabai === 0) {
     if (game_point > 5) {
       displayEnding(img5, "ありがとな。");
     } else {
