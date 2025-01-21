@@ -60,7 +60,7 @@ if(fadeOut){
     tint(255, alpha);
     image(img8, 0, 0, 816, 624);
     tint(255, alpha2);
-    image(img7, 0, 0, 816, 624);
+
   }
 
   if (isActivated) {
