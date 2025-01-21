@@ -68,7 +68,6 @@ if(fadeOut){
     state++; // 次の状態に遷移
   } else {
     // 通常時の処理
-    background(255);
     fill(0);
     if (title) {
       text("名前は？", 50, height / 2 - 20);
