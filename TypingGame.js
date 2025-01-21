@@ -25,7 +25,7 @@ function preload() {
   img7 = loadImage("assets/タイトル.png");
   img8 = loadImage("assets/クリック.png");
   soundFormats('mp3');
-  sound1 = loadSound("asetts/ほのぼの.mp3");
+  sound1 = loadSound("assets/ほのぼの.mp3");
 }
 
 function setup() {
