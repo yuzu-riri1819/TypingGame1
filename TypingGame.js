@@ -6,7 +6,7 @@ let title = false;
 let fadeIn = true; // フェードイン中かどうか
 let startTime; // 時間を計測するための変数
 let alphaValue = 0; // 透明度を管理
-let alpha = 0; 
+let alpha = 255; 
 let alpha2 = 255; 
 let state = 0; // 初期状態
 let game_point = 0;
@@ -67,8 +67,7 @@ if(fadeOut){
     isActivated = false; // 正解モードを終了
     state++; // 次の状態に遷移
   } else {
-    // 通常時の処理
-    fill(0);
+    // 通常時の
     if (title) {
       text("名前は？", 50, height / 2 - 20);
     } else if (state === 1) {
