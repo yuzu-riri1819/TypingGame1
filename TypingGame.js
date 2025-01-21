@@ -105,7 +105,7 @@ if(fadeOut){
 }
 
 function handleClearState() {
- if (yabai == 3 || yabai === 4) {
+ if (yabai === 3 || yabai === 4) {
   if (game_point === 11) {
     displayEnding(img0, "...なんなんだアンタ");
   }else if (game_point > 5 && game_point < 11) {
