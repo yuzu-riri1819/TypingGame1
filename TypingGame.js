@@ -37,6 +37,7 @@ function setup() {
 }
 
 function draw() {
+    image(img7, 0, 0, 816, 624);
 if(fadeOut){
   alpha2 -= 5; // 徐々に透明に
     if (alpha2 <= 0) {
@@ -60,7 +61,7 @@ if(fadeOut){
     tint(255, alpha);
     image(img8, 0, 0, 816, 624);
     tint(255, alpha2);
-    image(img7, 0, 0, 816, 624);
+
   }
 
   if (isActivated) {
