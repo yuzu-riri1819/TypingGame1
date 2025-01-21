@@ -122,7 +122,7 @@ function mousePressed() {
 if(!fadeOut){
   sound1.loop(); // ループ再生
 }
-  fadeOut = true; // クリックでフェードアウトを開始
+  title = true; // クリックでフェードアウトを開始
 }
 
 function keyPressed() {
