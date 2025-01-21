@@ -169,7 +169,7 @@ function handleUserInput() {
   if (normalized === normalizeInput("kigarashi hyouri") && state === 0) {
     isActivated = true;
     game_point++;
-  } else if (normalized === normalizeInput("wakaranai")) {
+  } else if (normalized === normalizeInput("wakaranai") && 0 <= state && state <= 9) {
     isActivated = true;
   } else if (normalized === normalizeInput("11/20") && state === 1) {
     isActivated = true;
