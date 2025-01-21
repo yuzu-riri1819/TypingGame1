@@ -99,6 +99,7 @@ if(fadeOut){
 }
 
   if (clear) {
+println("yabai:", yabai, "game_point:", game_point);
     // 状態ごとに表示内容を切り替え
     handleClearState();
   }
@@ -111,15 +112,15 @@ function handleClearState() {
   }else if (game_point > 5 && game_point < 11) {
       displayEnding(img1, "何で知ってんだ...？");
     } else {
-      displayEnding(img2, "…良く知ってんな……。");
+      displayEnding(img2, "良く知ってんな…。");
     }
-  } else if (yabai === 2) {
+  }else if (yabai === 2) {
     if (game_point > 5 && game_point < 11) {
       displayEnding(img3, "…ありがと。");
     } else {
       displayEnding(img4, "俺のこと、まあまあ知ってんだな。");
     }
-  } else if (yabai === 1 || yabai === 0) {
+  }else if (yabai === 1 || yabai === 0) {
     if (game_point > 5) {
       displayEnding(img5, "ありがとな。");
     } else {
