@@ -151,6 +151,15 @@ if(!fadeOut){
   title = true;
 }
 
+function touchStarted() {
+if(!fadeOut){
+  sound1.loop(); // ループ再生
+}
+  fadeOut = true; // クリックでフェードアウトを開始
+  title = true;
+}
+
+
 function keyPressed() {
   if (keyCode === BACKSPACE) {
     // バックスペースが押された場合、文字を削除
